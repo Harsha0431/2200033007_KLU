@@ -10,10 +10,17 @@ async function getAvgStockPriceController(req, res){
             return res.json({code: 0, message: "Please provide valid stock name."});
     
         const minutes = req.query.minutes || 60;
-        const aggregationType = req.query.aggregation || 'avg'
+
+        if(isNaN(minutes))
+            return res.json({code: 0, message: "Please provide a valid number for minutes"})
+        
+        if(minutes <= 0 || minutes > 180)
+            return res.json({code: 0, message: "Please minutes value between 1 to 180"});
+
+        const aggregationType = req.query.aggregation || 'average'
     
-        if(aggregationType != 'avg')
-            return {code: 0, message: "Only aggreation type Average is available"};
+        if(aggregationType != 'average')
+            return res.json({code: 0, message: "Only aggreation type Average is available"});
     
         const stockHistory = await stockHistoryUtil.getStockHistoryDriver(ticker, minutes);
 
