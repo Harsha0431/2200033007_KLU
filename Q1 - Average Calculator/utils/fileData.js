@@ -1,7 +1,9 @@
 const fs = require('fs');
+const path = require('path')
+
 
 async function writeDataToFile(data){
-    fs.writeFileSync('token.txt', data, (err) => {
+    fs.writeFileSync(path.join(__dirname, '../token.txt'), data, (err) => {
         if (err) {
             console.error('Error writing to file:', err);
         } else {
@@ -12,7 +14,7 @@ async function writeDataToFile(data){
 
 
 async function readDataFromFile(){
-    return fs.readFileSync('token.txt', 'utf8', (err, data) => {
+    return fs.readFileSync(path.join(__dirname, '../token.txt'), 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading from file:', err);
             return null;
