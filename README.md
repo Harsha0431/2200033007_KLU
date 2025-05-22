@@ -1,0 +1,1 @@
+> Output images are saved in `output` folders of respective questions.
